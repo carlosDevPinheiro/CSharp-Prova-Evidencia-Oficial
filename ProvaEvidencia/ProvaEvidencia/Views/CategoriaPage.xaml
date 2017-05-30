@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:ProvaEvidencia.Views.Base;assembly:ProvaEvidencia"
+             x:Class="ProvaEvidencia.Views.CategoriaPage">
+
+    <ScrollView>
+    <StackLayout Padding="0,50,0,0">
+        <Label Text="{Binding Name}" TextColor="Red" FontSize="Large" />
+        <Label Text="{Binding Email}" TextColor="Blue" FontSize="Medium" />
+        <Image Source="{Binding Photo}" />
+        
+        <ListView ItemsSource="{Binding Resultados}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding DetalhesCategoria}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Novo Usuario" Command="{Binding NewUsuarioCommand}" />
+    </StackLayout>
+    </ScrollView>
+</base:BasePage>

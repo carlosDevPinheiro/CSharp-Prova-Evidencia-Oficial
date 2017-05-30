@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProvaEvidencia.ViewModels;
+using ProvaEvidencia.Views.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ namespace ProvaEvidencia
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainViewModel();
         }
     }
 }

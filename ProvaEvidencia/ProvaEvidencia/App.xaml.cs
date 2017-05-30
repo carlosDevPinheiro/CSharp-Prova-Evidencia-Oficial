@@ -13,7 +13,7 @@ namespace ProvaEvidencia
         {
             InitializeComponent();
 
-            MainPage = new ProvaEvidencia.MainPage();
+            MainPage = new NavigationPage(new  ProvaEvidencia.MainPage());
         }
 
         protected override void OnStart()
