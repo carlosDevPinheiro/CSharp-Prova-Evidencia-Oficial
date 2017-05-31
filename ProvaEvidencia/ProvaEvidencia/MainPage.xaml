@@ -20,8 +20,11 @@
            VerticalOptions="Center" 
            />
 
-        <Image Source="{local:ImageResourceExtension ProvaEvidencia.Images.Logo.jpg}" Aspect="AspectFit" />
-        
+        <Image Source="{local:ImageResourceExtension ProvaEvidencia.Images.Logo.jpg}"
+               WidthRequest="80" HeightRequest="200" Aspect="AspectFit">
+          
+        </Image>
+
 
 
         <Button Text="Ir para Categorias" VerticalOptions="Center" Margin="0,50" BackgroundColor="Blue" TextColor="White"
