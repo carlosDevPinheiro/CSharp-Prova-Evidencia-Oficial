@@ -1,37 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-             xmlns:local="clr-namespace:ProvaEvidencia.Utils;assembly:ProvaEvidencia"
-             x:Class="ProvaEvidencia.MainPage">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{Binding Name}" />
-        <ToolbarItem Text="Buscar"/>
-    </ContentPage.ToolbarItems>
-
-
-    <StackLayout BackgroundColor="#9400D3">
-        <Label Text="Bem Vindo ao " FontSize="Small" TextColor="White"  
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
-        <Label Text="Lafan Cabelo e Cia" FontSize="Large" TextColor="White"
-               HorizontalOptions="CenterAndExpand" 
-           VerticalOptions="Center" 
-           />
-
-        <Image Source="{local:ImageResourceExtension ProvaEvidencia.Images.Logo.jpg}"
-               WidthRequest="80" HeightRequest="200" Aspect="AspectFit">
-          
-        </Image>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="ProvaEvidencia.MainPage">
 
 
 
-        <Button Text="Ir para Categorias" VerticalOptions="Center" Margin="0,50" BackgroundColor="Blue" TextColor="White"
-                Command="{Binding MostrarViewCategoriaCommand}"/>
 
-        <Label Text="{Binding UsuarioId}" TextColor="Red"/>
-        <Label Text="{Binding Email}" FontSize="Large" TextColor="Chocolate" />
-    </StackLayout>
+   
 
-</ContentPage>
+</MasterDetailPage>

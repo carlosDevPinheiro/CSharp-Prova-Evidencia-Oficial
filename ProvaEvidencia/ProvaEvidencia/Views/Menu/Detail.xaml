@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ProvaEvidencia.Utils;assembly=ProvaEvidencia"
+             x:Class="ProvaEvidencia.Views.Menu.Detail"
+             Title="{Binding Title}"
+             BackgroundColor="#f2b6f9">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sobre" Command="{Binding ShowAboutCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="0,20,0,0">
+        <Label Text="Ola Seja Bem Vindo" TextColor="#5e055c" FontSize="Medium" HorizontalOptions="Center"/>
+        <Image Source="{local:ImageResourceExtension ProvaEvidencia.Images.faixada.jpg}"
+               WidthRequest="80" HeightRequest="200" Aspect="AspectFit" />
+
+        <Label Text="Lafan Cabelo e Cia" TextColor="#5e055c" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
+
+        <Button Text="Servicos" BackgroundColor="#5e055c" TextColor="White"
+                    BorderColor="Blue"
+                    BorderRadius = "5"
+                    BorderWidth = "2"
+                Command="{Binding ShowCategoryCommand}"/> 
+
+        <Label Text="Rua Marechal Floriano Peixoto, 279" VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+        <Label Text="Centro Norte - Cuiabá" VerticalOptions="End" HorizontalOptions="Center" />
+        <Label Text="Mato Grosso - 78005-210" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,50" />
+    </StackLayout>
+   
+</ContentPage>

@@ -14,67 +14,36 @@ namespace ProvaEvidencia.ViewModels
 {
     public class CategoriaViewModel : BaseViewModel
     {
-        private string _email;
-
-        public string Email
-        {
-            get { return _email; }
-            set { SetProperty(ref _email, value); }
-        }
-
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
-        private string _image;
-
-        public string Photo
-        {
-            get { return _image; }
-            set { SetProperty(ref _image, value); }
-        }
-
 
         private CategoriaItemManager service;
         private AzureService _azureLogin;
         public ObservableCollection<Categoria> Resultados { get; private set; }
 
-        public Command NewUsuarioCommand { get; }
+        public Command<Categoria> SelectCategoryCommand { get; }
 
-        public CategoriaViewModel(AzureService AzureLogin)
+        public CategoriaViewModel()
         {
+            Title = "Selecione Categoria";
+
             service = new CategoriaItemManager();
-            _azureLogin = AzureLogin;
+            _azureLogin = new AzureService();
             Resultados = new ObservableCollection<Categoria>();
 
-             NewUsuarioCommand = new Command(ExecuteNewUsuarioCommand);
+            SelectCategoryCommand = new Command<Categoria>(ExecuteSelectCategoryCommand);
+        }        
 
-            Name = "Name Vazio";
-            Email = "Vazio";
-            Photo = "vazio";
+        private async void ExecuteSelectCategoryCommand(Categoria cat)
+        {
+            await PushAsync<ItemCategoriaViewModel, ItemCategoryPage>(cat);
         }
 
-        private async void ExecuteNewUsuarioCommand(object obj)
-        {
-            await PushAsync<NewCategoriaViewModel, NewCategoriaPage>(service);
-        }
-
-        public async Task<ObservableCollection<Categoria>> ListUsuario()
+        public async Task<ObservableCollection<Categoria>> ListCategories()
         {
 
-            var categorias = await service.todoTable.ToListAsync();          
-
-            Name = Settings.NameUsuario;
-            Email = Settings.Email;
-            Photo = Settings.Image;
-
+            var categories = await service.todoTable.ToListAsync();
 
             Resultados.Clear();
-            foreach (var item in categorias)
+            foreach (var item in categories.OrderBy(x => x.Name))
             {
                 Resultados.Add(item);
             }
@@ -84,7 +53,7 @@ namespace ProvaEvidencia.ViewModels
 
         public async override Task LoadAsync()
         {
-            await ListUsuario();
+            await ListCategories();
         }
 
     }

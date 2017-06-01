@@ -9,11 +9,12 @@ namespace ProvaEvidencia
 {
     public partial class App : Application
     {
+        public static MasterDetailPage MasterDetailNav { get; set; }
         public App()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new  ProvaEvidencia.MainPage());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

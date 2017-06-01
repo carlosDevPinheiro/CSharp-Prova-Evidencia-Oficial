@@ -1,9 +1,6 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
-using ProvaEvidencia.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,13 +8,12 @@ namespace ProvaEvidencia.Services
 {
     public class AzureService
     {
-        static readonly string AppUrl = "http://provaevidencia.azurewebsites.net/";
-
         public MobileServiceClient Client { get; set; } = null;
+       
 
         public void Initialize()
         {
-            Client = new MobileServiceClient(AppUrl);
+            Client = new MobileServiceClient(Constant.ApplicationURL);           
         }
 
 
@@ -29,7 +25,7 @@ namespace ProvaEvidencia.Services
             var user = await auth.Authenticate(Client, MobileServiceAuthenticationProvider.Facebook);
             var appServiceIdentities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
 
-            GetUserInformationAsync();
+            await GetUserInformationAsync();
 
             if (user == null)
             {
@@ -39,15 +35,18 @@ namespace ProvaEvidencia.Services
                 });
             }
 
+            Settings.UserId = user.UserId;
+            Settings.TokenFacebook = user.MobileServiceAuthenticationToken;
+
             return user;
         }
 
-        public async void GetUserInformationAsync()
+        public async Task GetUserInformationAsync()
         {
             var appServiceIdentities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
 
             if (appServiceIdentities.Count <= 0)
-                return;
+                return ;
 
             var appServiceIdentity = appServiceIdentities[0];
 
@@ -74,17 +73,10 @@ namespace ProvaEvidencia.Services
                 }
             }
 
-            var usuario = new Usuarios
-            {
-                ID = providerUserId,
-                Name = name,
-                Email = email,
-                Photo = "http://graph.facebook.com/" + providerUserId + "/picture?type=large"
-            };
-
-            Settings.Email = usuario.Email;
-            Settings.NameUsuario = usuario.Name;
-            Settings.Image = usuario.Photo;
+            Settings.UserId = providerUserId;
+            Settings.Email = email;
+            Settings.NameUsuario = name;
+            Settings.Image = "http://graph.facebook.com/" + providerUserId + "/picture?type=large";
         }
     }
 }

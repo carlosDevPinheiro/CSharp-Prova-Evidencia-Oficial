@@ -2,22 +2,28 @@
 <base:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:base="clr-namespace:ProvaEvidencia.Views.Base;assembly:ProvaEvidencia"
+             xmlns:controls="clr-namespace:ProvaEvidencia.Controls;assembly=ProvaEvidencia"
              x:Class="ProvaEvidencia.Views.CategoriaPage">
-
+    
     <ScrollView>
-    <StackLayout Padding="0,50,0,0">
-        <Label Text="{Binding Name}" TextColor="Red" FontSize="Large" />
-        <Label Text="{Binding Email}" TextColor="Blue" FontSize="Medium" />
-        <Image Source="{Binding Photo}" />
-        
-        <ListView ItemsSource="{Binding Resultados}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" Detail="{Binding DetalhesCategoria}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Button Text="Novo Usuario" Command="{Binding NewUsuarioCommand}" />
-    </StackLayout>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Resultados}"
+                      HasUnevenRows="True"
+                      ItemSelected="ListView_OnItemSelected"
+                      
+                      >                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout  Padding="0,15,0,0">
+                                <Label Text="{Binding Name}" HorizontalOptions="Center" TextColor="Violet" FontSize="Medium"/>
+                                <Image Source="{Binding Image}" HorizontalOptions="Center" />
+                                <Label Text="{Binding DetalhesCategoria}" HorizontalOptions="Center" FontSize="Small"/>
+                            </StackLayout>                           
+                        </ViewCell>                       
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>           
+        </StackLayout>
     </ScrollView>
 </base:BasePage>

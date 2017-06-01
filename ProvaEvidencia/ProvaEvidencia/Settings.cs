@@ -11,6 +11,7 @@ namespace ProvaEvidencia
         public static string UserId { get; set; }
         public static string NameUsuario { get; set; }
         public static string Email { get; set; }
-        public static string Image { get; set; }
+        public static string Image { get; set; }       
+        public static string TokenFacebook { get; set; }
     }
 }

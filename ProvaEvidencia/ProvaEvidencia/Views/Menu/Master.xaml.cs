@@ -1,24 +1,23 @@
 ﻿using ProvaEvidencia.ViewModels;
 using ProvaEvidencia.Views.Base;
-using ProvaEvidencia.Views.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace ProvaEvidencia
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace ProvaEvidencia.Views.Menu
 {
-    public partial class MainPage : MasterDetailPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Master : BasePage
     {
-        public MainPage()
+        public Master()
         {
             InitializeComponent();
-
-            Master = new Master();
-            Detail = new NavigationPage(new Detail());
-            App.MasterDetailNav = this;
+            BindingContext = new MasterViewModel();
         }
     }
 }

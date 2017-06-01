@@ -32,7 +32,7 @@ namespace ProvaEvidencia.ViewModels
         private readonly AzureService AzureLogin;
         public MainViewModel()
         {
-            TituloPagina = "Inicial";
+            Title = "Inicial";
             MostrarViewCategoriaCommand = new Command(ExecuteMostrarViewCategoriaCommad);
 
             AzureLogin = new AzureService();

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base ="clr-namespace:ProvaEvidencia.Views.Base;assembly=ProvaEvidencia"
+             x:Class="ProvaEvidencia.Views.ItemCategoryPage">
+
+    <StackLayout>
+        <Label Text="{Binding Name}"
+               HorizontalOptions="Center"
+               Margin="0,50,0,50"
+               TextColor="#5e055c"
+               FontSize="Large"/>
+
+        <Image Source="{Binding Photo}" 
+               WidthRequest="200" HeightRequest="200"
+               Aspect="AspectFit"
+               Margin="0,50,0,50"/>
+
+        <Label Text="{Binding Description}" TextColor="#5e055c" HorizontalOptions="Center" VerticalOptions="End" />
+    </StackLayout>
+</base:BasePage>

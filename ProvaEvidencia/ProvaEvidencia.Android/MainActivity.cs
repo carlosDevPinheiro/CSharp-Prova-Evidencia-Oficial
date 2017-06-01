@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Gcm.Client;
 using ProvaEvidencia.Droid.PushNotification;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace ProvaEvidencia.Droid
 {
@@ -26,6 +27,7 @@ namespace ProvaEvidencia.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            ImageCircleRenderer.Init();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             LoadApplication(new App());

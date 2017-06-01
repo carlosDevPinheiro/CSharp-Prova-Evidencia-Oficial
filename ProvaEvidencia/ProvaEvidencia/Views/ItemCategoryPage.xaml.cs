@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProvaEvidencia.Views.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace ProvaEvidencia.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewCategoriaPage : ContentPage
+    public partial class ItemCategoryPage : BasePage
     {
-        public NewCategoriaPage()
+        public ItemCategoryPage()
         {
             InitializeComponent();
         }

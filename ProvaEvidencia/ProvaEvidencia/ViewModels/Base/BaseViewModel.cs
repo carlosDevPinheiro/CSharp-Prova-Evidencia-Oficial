@@ -15,7 +15,7 @@ namespace ProvaEvidencia.ViewModels.Base
 
         private string _title;
 
-        public string TituloPagina
+        public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
@@ -50,7 +50,7 @@ namespace ProvaEvidencia.ViewModels.Base
                 Page.BindingContext = ViewModel;
             }
 
-            await Application.Current.MainPage.Navigation.PushAsync(Page);
+            await App.MasterDetailNav.Detail.Navigation.PushAsync(Page);
         }
 
         public virtual async Task LoadAsync()

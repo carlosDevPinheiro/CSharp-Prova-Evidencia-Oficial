@@ -1,4 +1,6 @@
-﻿using ProvaEvidencia.ViewModels.Base;
+﻿using ProvaEvidencia.Models;
+using ProvaEvidencia.ViewModels;
+using ProvaEvidencia.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +19,7 @@ namespace ProvaEvidencia.Views.Base
         {
             base.OnAppearing();
 
-            Title = ViewModel.TituloPagina;
+            Title = ViewModel.Title;
             ViewModel.PropertyChanged += TitlePropertyChanged;
             await ViewModel.LoadAsync();
         }
@@ -25,9 +27,15 @@ namespace ProvaEvidencia.Views.Base
         private void TitlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
-            if (e.PropertyName != nameof(ViewModel.TituloPagina)) return;
+            if (e.PropertyName != nameof(ViewModel.Title)) return;
 
-            Title = ViewModel.TituloPagina;
+            Title = ViewModel.Title;
+        }
+
+        public void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var cat = (sender as ListView)?.SelectedItem as Categoria;
+            (BindingContext as CategoriaViewModel)?.SelectCategoryCommand.Execute(cat);
         }
     }
 }
