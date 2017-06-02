@@ -28,7 +28,13 @@ namespace ProvaEvidencia.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             ImageCircleRenderer.Init();
+
+            /************************** Azure Mobile ***********************************/
+
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+
+            /************************** Azure Mobile ***********************************/
+
 
             LoadApplication(new App());
 

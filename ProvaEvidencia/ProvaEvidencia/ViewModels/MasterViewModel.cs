@@ -2,6 +2,7 @@
 using ProvaEvidencia.ViewModels.Base;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System;
 
 namespace ProvaEvidencia.ViewModels
 {
@@ -41,10 +42,12 @@ namespace ProvaEvidencia.ViewModels
             set { SetProperty(ref _login, value); }
         }
         public Command LoginCommand { get; }
+        public Command LogoutCommand { get; }
         public AzureService _azureLogin { get; set; }
         public MasterViewModel()
         {
             LoginCommand = new Command(ExecuteLoginCommand);
+            LogoutCommand = new Command(ExecuteLogoutCommand);
             _azureLogin = new AzureService();
 
             UserId = string.Empty;
@@ -54,7 +57,19 @@ namespace ProvaEvidencia.ViewModels
             Login = "Login";
         }
 
-        
+        private async  void ExecuteLogoutCommand(object obj)
+        {
+            var resp = await _azureLogin.LogoutAsync();
+
+            if (!resp)
+                return;
+
+            UserId = string.Empty;
+            Name = string.Empty;
+            Email = string.Empty;
+            Photo = string.Empty;
+            Login = "Login";
+        }
 
         private async void ExecuteLoginCommand(object obj)
         {

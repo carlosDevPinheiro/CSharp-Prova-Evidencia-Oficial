@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorize\AuthenticateAndroid.cs" />
+    <Compile Include="CustomControls\ExtendedViewCellRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PushNotification\GcmService.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

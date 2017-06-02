@@ -10,12 +10,17 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Gcm.Client;
-using Microsoft.WindowsAzure.MobileServices;
+
+
+
+
 using Android.Util;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using Android.Support.V7.App;
 using Android.Media;
+
+using Microsoft.WindowsAzure.MobileServices;
 
 [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
 [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
@@ -41,7 +46,13 @@ namespace ProvaEvidencia.Droid.PushNotification
     [Service]
     public class GcmService : GcmServiceBase
     {
+        /************************** Azure Mobile Service Client ***********************************/
+
         MobileServiceClient client = new MobileServiceClient("http://provaevidencia.azurewebsites.net");
+
+        /************************** Azure Mobile Service Client ***********************************/
+
+
         public static string RegistrationID { get; private set; }
 
         public GcmService()
@@ -62,7 +73,7 @@ namespace ProvaEvidencia.Droid.PushNotification
             try
             {
                 const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
-               // const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"\"url\":\"$(messageParam)\"}}";
+               
 
                 JObject templates = new JObject();
                 templates["genericMessage"] = new JObject
@@ -77,7 +88,7 @@ namespace ProvaEvidencia.Droid.PushNotification
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-               // Debugger.Break();
+              // Debugger.Break();
             }
         }
 

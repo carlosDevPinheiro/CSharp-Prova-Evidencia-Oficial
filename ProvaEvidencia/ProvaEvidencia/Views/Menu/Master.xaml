@@ -29,6 +29,8 @@
                     CommandParameter="Image1" />
             </Image.GestureRecognizers>
         </Image>
-        
+
+        <Button Text="Logout" Command="{Binding LogoutCommand}" />
+
     </StackLayout>
 </base:BasePage>

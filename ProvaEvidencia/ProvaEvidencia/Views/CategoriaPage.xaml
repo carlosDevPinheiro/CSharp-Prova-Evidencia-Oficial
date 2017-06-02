@@ -2,25 +2,25 @@
 <base:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:base="clr-namespace:ProvaEvidencia.Views.Base;assembly:ProvaEvidencia"
-             xmlns:controls="clr-namespace:ProvaEvidencia.Controls;assembly=ProvaEvidencia"
+             xmlns:controls="clr-namespace:ProvaEvidencia.Utils;assembly=ProvaEvidencia"
              x:Class="ProvaEvidencia.Views.CategoriaPage">
     
     <ScrollView>
         <StackLayout>
             <ListView ItemsSource="{Binding Resultados}"
                       HasUnevenRows="True"
-                      ItemSelected="ListView_OnItemSelected"
-                      
-                      >                
+                      ItemSelected="ListView_OnItemSelected">                
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <controls:ExtendedViewCell SelectedBackgroundColor="LightPink">
+                        <ViewCell.View>
                             <StackLayout  Padding="0,15,0,0">
                                 <Label Text="{Binding Name}" HorizontalOptions="Center" TextColor="Violet" FontSize="Medium"/>
                                 <Image Source="{Binding Image}" HorizontalOptions="Center" />
                                 <Label Text="{Binding DetalhesCategoria}" HorizontalOptions="Center" FontSize="Small"/>
                             </StackLayout>                           
-                        </ViewCell>                       
+                        </ViewCell.View>
+                        </controls:ExtendedViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>           

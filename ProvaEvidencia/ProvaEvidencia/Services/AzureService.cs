@@ -16,7 +16,6 @@ namespace ProvaEvidencia.Services
             Client = new MobileServiceClient(Constant.ApplicationURL);           
         }
 
-
         public async Task<MobileServiceUser> LoginAsync()
         {
             Initialize();
@@ -39,6 +38,34 @@ namespace ProvaEvidencia.Services
             Settings.TokenFacebook = user.MobileServiceAuthenticationToken;
 
             return user;
+        }
+
+
+
+
+
+
+
+
+
+
+        public async Task<bool> LogoutAsync()
+        {
+            Initialize();
+            bool result = false;
+
+            var auth = DependencyService.Get<IAuthenticate>();
+            var user = await auth.Authenticate(Client, MobileServiceAuthenticationProvider.Facebook);
+
+            await auth.LogoutAsync(Client,MobileServiceAuthenticationProvider.Facebook).ContinueWith( t => 
+            {
+                if(t.IsCompleted)
+                    result = true;
+            });
+
+           
+
+            return result;
         }
 
         public async Task GetUserInformationAsync()

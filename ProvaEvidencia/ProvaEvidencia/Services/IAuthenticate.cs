@@ -10,5 +10,6 @@ namespace ProvaEvidencia.Services
     public interface IAuthenticate
     {
         Task<MobileServiceUser> Authenticate(MobileServiceClient cliente, MobileServiceAuthenticationProvider provider);
+        Task LogoutAsync(MobileServiceClient client, MobileServiceAuthenticationProvider provider);
     }
 }

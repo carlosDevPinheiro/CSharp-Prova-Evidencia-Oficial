@@ -50,6 +50,7 @@
     <Compile Include="Services\Constant.cs" />
     <Compile Include="Services\IAuthenticate.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Utils\ExtendedViewCell.cs" />
     <Compile Include="Utils\ImageResourceExtension.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />

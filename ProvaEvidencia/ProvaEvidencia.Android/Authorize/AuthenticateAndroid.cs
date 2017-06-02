@@ -12,6 +12,7 @@ using Android.Widget;
 using Microsoft.WindowsAzure.MobileServices;
 using ProvaEvidencia.Services;
 using ProvaEvidencia.Droid.Authorize;
+using Android.Webkit;
 
 [assembly:Xamarin.Forms.Dependency(typeof(AuthenticateAndroid))]
 namespace ProvaEvidencia.Droid.Authorize
@@ -28,6 +29,20 @@ namespace ProvaEvidencia.Droid.Authorize
             {
                 System.Diagnostics.Debug.WriteLine("Erro no Login " + ex.ToString());
                 return null;
+            }
+        }
+
+        public async Task LogoutAsync(MobileServiceClient client, MobileServiceAuthenticationProvider provider)
+        {
+            try
+            {
+                CookieManager.Instance.RemoveAllCookie();
+                await client.LogoutAsync();              
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine("Erro ao tentar o Logout = " + ex.ToString());
             }
         }
     }
