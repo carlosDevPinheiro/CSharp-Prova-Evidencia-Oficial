@@ -80,8 +80,7 @@ namespace ProvaEvidencia.Droid.PushNotification
         {
             try
             {
-                //const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
-
+                
                 const string templateBodyGCM = "{\"" + HEADER_PUSH + "\":{" +
                         "\"" + MESSAGE_PUSH + "\":\"$(messageParam)\"" +
                         "\"" + MESSAGE_PUSH_TITLE + "\":\"$(titleParam)\"" +
@@ -131,8 +130,6 @@ namespace ProvaEvidencia.Droid.PushNotification
             {
                 CreateNotification(title,message,image);
                // CreateNotification("Nova Notificação!", "Menssagem: " + title);
-               
-
                 return;
             }
             string msg2 = intent.Extras.GetString("msg");
@@ -157,24 +154,21 @@ namespace ProvaEvidencia.Droid.PushNotification
             //we use the pending intent, passing our ui intent over which will get called 
             //when the notification is tapped. 
 
-
-
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.InSampleSize = 2;
-           
-           
-
             
             WebClient client = new WebClient();
             System.IO.Stream stream = client.OpenRead(image);
             Bitmap myBitmap = BitmapFactory.DecodeStream(stream,null,options);
 
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
+                
                 .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
                 .SetTicker(title)
                 .SetContentTitle(title)
                 .SetContentText(desc)
                 .SetStyle(new NotificationCompat.BigPictureStyle().BigPicture(myBitmap))
+                .SetLargeIcon(BitmapFactory.DecodeResource(Resources, Resource.Drawable.logo))
 
                 //Set the notification sound
                 .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
@@ -182,9 +176,6 @@ namespace ProvaEvidencia.Droid.PushNotification
                 .SetAutoCancel(true).Build();
             //Show the notification 
             notificationManager.Notify(1, notification);
-           
-
-
         }
 
         protected override void OnUnRegistered(Context context, string registrationId)
