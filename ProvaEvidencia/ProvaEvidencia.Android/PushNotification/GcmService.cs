@@ -10,10 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Gcm.Client;
-
-
-
-
 using Android.Util;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
@@ -21,6 +17,8 @@ using Android.Support.V7.App;
 using Android.Media;
 
 using Microsoft.WindowsAzure.MobileServices;
+using Android.Graphics;
+using System.Net;
 
 [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
 [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
@@ -52,6 +50,16 @@ namespace ProvaEvidencia.Droid.PushNotification
 
         /************************** Azure Mobile Service Client ***********************************/
 
+        private const string HEADER_PUSH = "data";
+        private const string MESSAGE_PUSH = "message";
+        private const string MESSAGE_PUSH_TITLE = "title";
+        private const string IMAGE_PUSH = "image";
+        private const string UNKNOWN_MESSAGE_PUSH = "Unknown message detail";
+
+        private const string GENERIC_PUSH_MESSAGE = "genericMessage";
+        private const string BODY_PUSH_MESSAGE = "body";
+       
+
 
         public static string RegistrationID { get; private set; }
 
@@ -72,8 +80,13 @@ namespace ProvaEvidencia.Droid.PushNotification
         {
             try
             {
-                const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
-               
+                //const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
+
+                const string templateBodyGCM = "{\"" + HEADER_PUSH + "\":{" +
+                        "\"" + MESSAGE_PUSH + "\":\"$(messageParam)\"" +
+                        "\"" + MESSAGE_PUSH_TITLE + "\":\"$(titleParam)\"" +
+                        "\"" + IMAGE_PUSH + "\":\"$(imageParam)\"" +
+                        "}}";
 
                 JObject templates = new JObject();
                 templates["genericMessage"] = new JObject
@@ -106,25 +119,33 @@ namespace ProvaEvidencia.Droid.PushNotification
             }
             //Store the message 
             var prefs = GetSharedPreferences(context.PackageName, FileCreationMode.Private);
-            var edit = prefs.Edit(); edit.PutString("last_msg", msg.ToString());
+            var edit = prefs.Edit();
+            edit.PutString("last_msg", msg.ToString());
             edit.Commit();
-            string message = intent.Extras.GetString("message");
+
+            string message = intent.Extras.GetString(MESSAGE_PUSH);
+            string title = intent.Extras.GetString(MESSAGE_PUSH_TITLE);
+            string image = intent.Extras.GetString(IMAGE_PUSH);
+
             if (!string.IsNullOrEmpty(message))
             {
-                CreateNotification("Nova Notificação!", "Menssagem: " + message);
+                CreateNotification(title,message,image);
+               // CreateNotification("Nova Notificação!", "Menssagem: " + title);
+               
+
                 return;
             }
             string msg2 = intent.Extras.GetString("msg");
             if (!string.IsNullOrEmpty(msg2))
             {
-                CreateNotification("Nova Notificação!!", msg2);
+                CreateNotification("Nova Notificação!!", msg2,null);
                 return;
             }
-            CreateNotification("Unknown message details", msg.ToString());
+            CreateNotification("Unknown message details", msg.ToString(),null);
         }
 
 
-        void CreateNotification(string title, string desc)
+        void CreateNotification(string title, string desc, string image)
         {
             //Create notification
             var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
@@ -135,11 +156,25 @@ namespace ProvaEvidencia.Droid.PushNotification
             //Create the notification 
             //we use the pending intent, passing our ui intent over which will get called 
             //when the notification is tapped. 
+
+
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.InSampleSize = 2;
+           
+           
+
+            
+            WebClient client = new WebClient();
+            System.IO.Stream stream = client.OpenRead(image);
+            Bitmap myBitmap = BitmapFactory.DecodeStream(stream,null,options);
+
             var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
                 .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
                 .SetTicker(title)
                 .SetContentTitle(title)
                 .SetContentText(desc)
+                .SetStyle(new NotificationCompat.BigPictureStyle().BigPicture(myBitmap))
 
                 //Set the notification sound
                 .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
@@ -147,6 +182,9 @@ namespace ProvaEvidencia.Droid.PushNotification
                 .SetAutoCancel(true).Build();
             //Show the notification 
             notificationManager.Notify(1, notification);
+           
+
+
         }
 
         protected override void OnUnRegistered(Context context, string registrationId)
