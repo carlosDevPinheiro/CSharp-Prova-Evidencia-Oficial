@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaEvidencia.Android", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProvaEvidencia", "ProvaEvidencia\ProvaEvidencia\ProvaEvidencia.csproj", "{414F3B56-1CF1-493A-BABB-69CA8E226E79}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureTemplatePushNotification", "AzureTemplatePushNotification", "{53B21965-7BA2-458B-AB23-B8C7DCC4FDF7}"
+	ProjectSection(SolutionItems) = preProject
+		MessageTemplate.txt = MessageTemplate.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

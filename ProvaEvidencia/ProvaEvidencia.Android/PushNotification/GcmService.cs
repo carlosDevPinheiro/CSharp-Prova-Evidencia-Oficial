@@ -73,7 +73,8 @@ namespace ProvaEvidencia.Droid.PushNotification
         {
             Log.Verbose("PushHandlerBroadcastReceiver", "GCM Registered: " + registrationId);
             RegistrationID = registrationId;
-            var push = client.GetPush(); MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
+            var push = client.GetPush();
+            MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
         }
 
         public async void Register(Microsoft.WindowsAzure.MobileServices.Push push, IEnumerable<string> tags)
@@ -100,7 +101,7 @@ namespace ProvaEvidencia.Droid.PushNotification
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-              // Debugger.Break();
+               // Debugger.Break();
             }
         }
 

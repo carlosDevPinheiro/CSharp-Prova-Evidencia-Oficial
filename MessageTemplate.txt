@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=A7ZsvnrSPG4
+https://ticapacitacion.com/curso/xamarinipt/
+
+{"data":
+{
+    "message":"Promoções do Salão Lafan",
+    "title":"ConfirA Novos Penteados",    "image":"https://images1.minhavida.com.br/imagensConteudo/16003/corvibrante-cabelo_16003_250_375.jpg"
+}
+}
